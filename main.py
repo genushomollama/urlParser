@@ -53,12 +53,21 @@ class Parser:
         except IndexError:
             pass # TODO we will skip this line in this case, print out error with line for posterity
         for item in data_right:
+            param_list = list()
             if "?" in item:
                 x = item.index("?")
-
-                # api_call = item.split("?")  # split on ?, 0 is endpoint and 1 is param/values
+                endpoint_name = item[:x]
                 # if api_dict["endpoints_to_param"].keys().count(api_call[0])# check if endpoint in api.keys(), if not then set it up
-                # # split on &, for each pair split on =, add parameters and values to proper structures
+                if api_dict["endpoints_to_param"].keys().count(endpoint_name) > 0:
+                    param_list = api_dict["endpoints_to_param"][endpoint_name]
+                if x < len(item) - 2:
+                    param_value = item[x+1:]
+                    new_data = param_list.split("&")
+                    current_param = new_data[0]
+                    for pair in new_data:
+                        if "=" in pair:
+                            pass
+
                 pass # process api side
             else:
                 subdomains.append(item) # record the subdirectories
@@ -69,13 +78,6 @@ class Parser:
         data["directories"] = directories
         return False #fixme return true if anything good is collected
 
-    def initialize_api_dict(self):
-        # keys: parameters to values, endpoints to parameters
-        api_dict = dict()
-        api_dict["endpoints_to_param"] = dict()
-        api_dict["parameters_to_values"] = dict()
-
-        return api_dict
 
 
 
