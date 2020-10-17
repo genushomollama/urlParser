@@ -42,6 +42,7 @@ class EndpointParser:
     def get_values(self):
         return self.values
 
+
 if __name__ == '__main__':
     url = "https://trends.realself.com/2018/01/18/botox-new-alternative/?utm_content=buffercdb74&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer"
     parser = EndpointParser(url)
